@@ -87,13 +87,13 @@ Read more about [calibration](https://github.com/Ho-Ro/Hantek6022API/blob/master
     * If the **trigger condition is false** and the **trigger mode is Normal** then we reuse the last triggered samples so that voltage and spectrum traces as well as the measurement at the scope's bottom lines are frozen until the trigger condition becomes true again.
     * If the **trigger condition is false** and the **trigger mode is not Normal** then we display a free running trace and discard the last saved samples.
 * The converted samples are emitted to PostProcessing::input() via signal/slot.
-* PostProzessing calls all processors that were registered in `main.cpp`.
+* PostProcessing calls all processors that were registered in `main.cpp`.
   * `MathchannelGenerator::process()`
     * which creates a third MATH channel as one of these data sample combinations: 
       `CH1 + CH2`, `CH1 - CH2`, `CH2 - CH1`, `CH1 * CH2`, `CH1 AC` or `CH2 AC`.
   * `SpectrumGenerator::process()`
     * For each active channel:
-      * Calculate the peak-to-peak, DC (average), AC (rms) and effective value ( sqrt( DC² + AC² ) ).
+      * Calculate the peak-to-peak, DC (average), AC (rms) and effective value ( sqrt( DCÂ² + ACÂ² ) ).
       * Apply a user selected window function and scale the result accordingly.
       * Calculate the autocorrelation to get the frequency of the signal. This is quite inaccurate at high frequencies. In these cases the first peak value of the spectrum is used.
       * Calculate the spectrum of the AC part of the signal scaled as dBV.
